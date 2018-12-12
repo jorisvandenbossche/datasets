@@ -1,3 +1,4 @@
+import glob
 import os
 from collections import namedtuple
 
@@ -31,7 +32,7 @@ MEDICAL_CHARGE_CONFIG = DatasetInfo(
 
 def get_medical_charge_df(save=True):
     data_dir = fetch(MEDICAL_CHARGE_CONFIG)
-    file = os.listdir(data_dir[0])[0]
+    file = glob.glob(os.path.join(data_dir[0], '*.csv'))[0]
     csv_path = os.path.join(data_dir[0], file)
     df = pd.read_csv(csv_path)
     cat_cols = ['DRG Definition', 'Provider State']
